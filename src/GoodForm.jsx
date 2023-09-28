@@ -45,46 +45,25 @@ function App() {
     <div className="container">
       <h1>Registration Form</h1>
       <form onSubmit={handleSubmit} className="signup-form">
-        <label htmlFor="username">Username</label>
-        <input
-          onChange={(e) => setUsername(e.target.value)}
-          type="text"
-          className="input_field"
-          placeholder="Enter username"
-        />
-        {errorMessages.username && (
-          <p className="error_message">{errorMessages.username}</p>
-        )}
-
-        <label htmlFor="user_email">Enter your Email</label>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          className="input_field"
-          placeholder="Enter Email"
+        <FormField
+          title={"username"}
+          setValue={setUsername}
+          error={errorMessages.username}
         />
 
-        <label htmlFor="password">Password</label>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          type="text"
-          className="input_field"
-          placeholder="Enter Password"
-        />
-        {errorMessages.password && (
-          <p className="error_message">{errorMessages.password}</p>
-        )}
+        <FormField title={"email"} setValue={setEmail} error={""} />
 
-        <label htmlFor="confirm_password">Confirm password</label>
-        <input
-          onChange={(e) => setConsfirmPassword(e.target.value)}
-          type="text"
-          className="input_field"
-          placeholder="Confirm Your password"
+        <FormField
+          title={"password"}
+          setValue={setPassword}
+          error={errorMessages.password}
         />
-        {errorMessages.confirmPassword && (
-          <p className="error_message">{errorMessages.confirmPassword}</p>
-        )}
+
+        <FormField
+          title={"confirmPassword"}
+          setValue={setConsfirmPassword}
+          error={errorMessages.confirmPassword}
+        />
 
         <button type="submit" className="btn">
           Register
@@ -95,3 +74,18 @@ function App() {
 }
 
 export default App;
+
+function FormField({ title, setValue, error }) {
+  return (
+    <>
+      <label htmlFor={title}>{title}</label>
+      <input
+        onChange={(e) => setValue(e.target.value)}
+        type="text"
+        className="input_field"
+        placeholder={`Enter ${title}`}
+      />
+      {error && <p className="error_message">{error}</p>}
+    </>
+  );
+}
