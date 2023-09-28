@@ -2,24 +2,21 @@ import React, { useState } from "react";
 import "./App.css";
 import { formHandling } from "./Validation";
 const FormKeys = ["username", "email", "password", "consfirmPassword"];
-
-const errorObj = {
+const FormEntries = {
   username: "",
+  email: "",
   password: "",
-  confirmPassword: "",
+  consfirmPassword: "",
 };
 
+const errorObj = { ...FormEntries };
+
 function App() {
-  const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-    consfirmPassword: "",
-  });
+  const [values, setValues] = useState(FormEntries);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const updatedValues = { ...values, [name]: value };
+    const updatedValues = { ...values, [name]: value }; //  Merge previous values with updated value
     setValues(updatedValues);
   };
 
